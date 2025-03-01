@@ -15,8 +15,8 @@ if env_loaded:
 else:
     logging.error("Environment variables not loaded.")
 
-# api_key = os.getenv("GOOGLE_API_KEY")
-api_key = st.secrets["GOOGLE_API_KEY"]
+api_key = os.getenv("GOOGLE_API_KEY")
+#api_key = st.secrets["GOOGLE_API_KEY"]
 if api_key:
     genai.configure(api_key=api_key)
 else:
@@ -152,7 +152,7 @@ if submit:
             with st.spinner('Generating notes...'):
                 transcript_data = extract_transcript_data(video_url)
                 if transcript_data is not None: # check if transcript data is not None
-                    model = genai.GenerativeModel('gemini-pro')
+                    model = genai.GenerativeModel('gemini-1.5-pro-latest')
                     response = model.generate_content(text_area + transcript_data +language_prompt)
                     final_response = response.text
                     st.subheader("Generated Notes:")
